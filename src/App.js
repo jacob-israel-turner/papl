@@ -25,24 +25,8 @@ class App extends Component {
   }
 
   render() {
-    // return <AceEditor
-    //   mode="javascript"
-    //   theme="monokai"
-    //   onChange={this.onChange}
-    //   name="UNIQUE_ID_OF_DIV"
-    //   editorProps={{$blockScrolling: true}}
-    //   setOptions={{
-    //     enableBasicAutocompletion: false,
-    //     enableLiveAutocompletion: true,
-    //     showLineNumbers: true,
-    //     enableSnippets: false,
-    //     tabSize: 2,
-    //   }}
-    // />
     return (
-      <div style={{
-        
-      }}>
+      <div>
         <AceEditor
           style={{
             position: 'absolute',

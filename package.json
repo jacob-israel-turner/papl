@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "private": false,
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
     "brace": "^0.10.0",
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
+    "nodemon": "^1.12.1",
     "react": "^16.0.0",
     "react-ace": "^5.2.2",
     "react-autobind": "^1.0.6",
@@ -12,8 +17,17 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:server": "node server-build/index.js",
+    "start:server:watch": "nodemon --exec \"yarn clean && yarn build:server && yarn start:server\" --watch ./server",
+    "clean": "rm -rf server-build && mkdir server-build",
+    "build:server": "babel -d ./server-build ./server -s",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
   }
 }
