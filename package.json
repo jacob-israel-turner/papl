@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "private": false,
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-cli": "^6.26.0",
     "babel-preset-latest": "^6.24.1",
     "brace": "^0.10.0",
     "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-cors": "^0.0.16",
     "koa-router": "^7.2.1",
     "nodemon": "^1.12.1",
     "react": "^16.0.0",

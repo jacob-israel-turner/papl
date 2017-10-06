@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import AceEditor from 'react-ace';
 import autoBind from 'react-autobind';
+import axios from 'axios';
 
 import 'brace/mode/javascript';
 import 'brace/snippets/javascript';
 import 'brace/theme/monokai';
 import 'brace/ext/language_tools';
+
+const baseUrl = `http://localhost:9001`;
 
 class App extends Component {
   constructor() {
@@ -20,8 +23,9 @@ class App extends Component {
     this.setState({ code: e });
   }
 
-  run() {
-    console.log(this.state.code);
+  async run() {
+    const response = await axios.post(`${baseUrl}/eval`, { code: this.state.code });
+    console.log(response);
   }
 
   render() {
