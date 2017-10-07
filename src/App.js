@@ -24,8 +24,8 @@ class App extends Component {
   }
 
   async run() {
-    const response = await axios.post(`${baseUrl}/eval`, { code: this.state.code });
-    console.log(response);
+    const { data } = await axios.post(`${baseUrl}/eval`, { code: this.state.code });
+    console.log(data);
   }
 
   render() {
