@@ -34,10 +34,10 @@ app
 function evalCode(code) {
   return new Promise(async (resolve, reject) => {
     const deps = matchRequire.findAll(code);
-    const depsInstalled = await Promise.all([...deps.map(dep => checkIfDepInstalled(dep))]);
+    const depsInstalled = await Promise.all(deps.map(dep => checkIfDepInstalled(dep)));
     const needInstalled = deps.filter((dep, index) => !depsInstalled[index])
 
-    console.log('THESE NEED INSTALLED', needInstalled);
+    await Promise.all(needInstalled.map(installDep));
 
     const evaluate = spawn('node', ['-e', code]);
     let all = [];
@@ -59,7 +59,7 @@ function evalCode(code) {
 
 async function installDep (dep) {
   return new Promise((resolve, reject) => {
-    const evaluate = spawn('npm', ['instal', '--no-save', dep]);
+    const evaluate = spawn('npm', ['install', '--no-save', dep]);
     evaluate.stdout.on('data', (data) => {
       console.log(data.toString());
     });
@@ -67,6 +67,7 @@ async function installDep (dep) {
       console.log(data.toString());
     });
     evaluate.on('close', (code) => {
+      console.log('done installing', dep);
       resolve();
     });
   })
