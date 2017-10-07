@@ -44,11 +44,11 @@ function evalCode(code) {
     let out = [];
     let err = [];
     evaluate.stdout.on('data', (data) => {
-      all.push(data.toString());
+      all.push({ type: 'out', log: data.toString() });
       out.push(data.toString());
     });
     evaluate.stderr.on('data', (data) => {
-      all.push(data.toString());
+      all.push({ type: 'error', log: data.toString() });
       err.push(data.toString());
     });
     evaluate.on('close', (code) => {

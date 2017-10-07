@@ -24,8 +24,13 @@ class App extends Component {
   }
 
   async run() {
-    const { data } = await axios.post(`${baseUrl}/eval`, { code: this.state.code });
-    console.log(data);
+    const { data: { all, dependencies } } = await axios.post(`${baseUrl}/eval`, { code: this.state.code });
+    console.log(all, dependencies);
+    console.log('DEPENDENCIES', dependencies);
+    all.forEach(({ type, log }) => {
+      if (type === 'out') console.log(log);
+      if (type === 'error') console.error(log);
+    })
   }
 
   render() {
